@@ -1,0 +1,26 @@
+{
+  "id_map": {},
+  "mod_elements": [],
+  "variable_elements": [],
+  "sound_elements": [],
+  "language_map": {
+    "en_us": {}
+  },
+  "workspaceSettings": {
+    "modid": "toeppelmod",
+    "modName": "TöppelMod",
+    "version": "1.0.0",
+    "author": "WAU HL",
+    "websiteURL": "https://mcreator.net",
+    "disableForgeVersionCheck": true,
+    "serverSideOnly": false,
+    "requiredMods": [],
+    "dependencies": [],
+    "dependants": [],
+    "mcreatorDependencies": [],
+    "currentGenerator": "1.14.4",
+    "modElementsPackage": "wau.hl.toeppelmod",
+    "lockBaseModFiles": false
+  },
+  "mcreatorVersion": 202000213314
+}
