@@ -19,6 +19,14 @@
       "compiles": true,
       "locked_code": false,
       "ids": {}
+    },
+    {
+      "name": "Napf",
+      "type": "block",
+      "sortid": 2,
+      "compiles": true,
+      "locked_code": false,
+      "ids": {}
     }
   ],
   "variable_elements": [],
@@ -26,6 +34,7 @@
   "language_map": {
     "en_us": {
       "entity.toeppelmod.toppel": "Töppel",
+      "block.toeppelmod.napf": "Napf",
       "item.toeppelmod.toppel": "Töppel Spawn Egg"
     }
   },

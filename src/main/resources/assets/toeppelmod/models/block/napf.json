@@ -1,0 +1,10 @@
+{
+  "parent": "toeppelmod:custom/toppelnapf",
+  "textures": {
+    "all": "toeppelmod:blocks/toppel_napf",
+    "particle": "toeppelmod:blocks/toppel_napf",
+    "0": "toeppelmod:blocks/toppel_napf",
+    "1": "toeppelmod:blocks/texture",
+    "missing": "toeppelmod:blocks/"
+  }
+}

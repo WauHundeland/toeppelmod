@@ -1,0 +1,12 @@
+{
+  "mappings": {
+    "default": {
+      "map": {
+        "0": "toppel_napf",
+        "1": "texture",
+        "missing": ""
+      },
+      "name": "default"
+    }
+  }
+}
