@@ -1,5 +1,5 @@
 {
-  "_fv": 6,
+  "_fv": 10,
   "_type": "block",
   "definition": {
     "texture": "toppel_napf",
@@ -11,7 +11,9 @@
     "renderType": 2,
     "customModelName": "toppelnapf:default",
     "rotationMode": 0,
+    "emissiveRendering": false,
     "hasTransparency": true,
+    "connectedSides": false,
     "transparencyType": "SOLID",
     "mx": 0.0,
     "my": 0.0,
@@ -19,7 +21,6 @@
     "Mx": 1.0,
     "My": 1.0,
     "Mz": 1.0,
-    "faceShape": "SOLID",
     "name": "Napf",
     "specialInfo": [],
     "hardness": 1.0,
@@ -29,7 +30,6 @@
       "value": "BUILDING_BLOCKS"
     },
     "destroyTool": "Not specified",
-    "affectedBySilkTouch": true,
     "customDrop": {
       "value": ""
     },
@@ -49,6 +49,8 @@
     "creativePickItem": {
       "value": ""
     },
+    "offsetType": "NONE",
+    "aiPathNodeType": "DEFAULT",
     "flammability": 0,
     "fireSpreadSpeed": 0,
     "isLadder": false,
@@ -68,7 +70,6 @@
     "particleSpawningShape": "Spread",
     "particleSpawningRadious": 0.5,
     "particleAmount": 4,
-    "particleSpawningCondition": "ALWAYS",
     "hasInventory": false,
     "guiBoundTo": "<NONE>",
     "openGUIOnRightClick": false,
@@ -77,6 +78,14 @@
     "inventoryDropWhenDestroyed": true,
     "inventoryComparatorPower": true,
     "inventoryOutSlotIDs": [],
+    "inventoryInSlotIDs": [],
+    "hasEnergyStorage": false,
+    "energyInitial": 0,
+    "energyCapacity": 400000,
+    "energyMaxReceive": 200,
+    "energyMaxExtract": 200,
+    "isFluidTank": false,
+    "fluidCapacity": 8000,
     "spawnWorldTypes": [],
     "restrictionBiomes": [],
     "blocksToReplace": [

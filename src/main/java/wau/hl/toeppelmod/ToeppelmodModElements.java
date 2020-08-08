@@ -7,24 +7,19 @@
 package wau.hl.toeppelmod;
 
 import net.minecraftforge.forgespi.language.ModFileScanData;
-import net.minecraftforge.fml.network.PacketDistributor;
 import net.minecraftforge.fml.network.NetworkEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.ModList;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.common.MinecraftForge;
 
-import net.minecraft.world.storage.WorldSavedData;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.tags.Tag;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.item.Item;
-import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.block.Block;
 
 import java.util.function.Supplier;
@@ -40,66 +35,40 @@ import java.util.ArrayList;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Retention;
 
-public class TppelModElements {
+public class ToeppelmodModElements {
 	public final List<ModElement> elements = new ArrayList<>();
 	public final List<Supplier<Block>> blocks = new ArrayList<>();
 	public final List<Supplier<Item>> items = new ArrayList<>();
 	public final List<Supplier<Biome>> biomes = new ArrayList<>();
 	public final List<Supplier<EntityType<?>>> entities = new ArrayList<>();
+	public final List<Supplier<Enchantment>> enchantments = new ArrayList<>();
 	public static Map<ResourceLocation, net.minecraft.util.SoundEvent> sounds = new HashMap<>();
-	public TppelModElements() {
+	public ToeppelmodModElements() {
 		try {
 			ModFileScanData modFileInfo = ModList.get().getModFileById("toeppelmod").getFile().getScanResult();
 			Set<ModFileScanData.AnnotationData> annotations = modFileInfo.getAnnotations();
 			for (ModFileScanData.AnnotationData annotationData : annotations) {
 				if (annotationData.getAnnotationType().getClassName().equals(ModElement.Tag.class.getName())) {
 					Class<?> clazz = Class.forName(annotationData.getClassType().getClassName());
-					if (clazz.getSuperclass() == TppelModElements.ModElement.class)
-						elements.add((TppelModElements.ModElement) clazz.getConstructor(this.getClass()).newInstance(this));
+					if (clazz.getSuperclass() == ToeppelmodModElements.ModElement.class)
+						elements.add((ToeppelmodModElements.ModElement) clazz.getConstructor(this.getClass()).newInstance(this));
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		Collections.sort(elements);
-		elements.forEach(TppelModElements.ModElement::initElements);
-		this.addNetworkMessage(TppelModVariables.WorldSavedDataSyncMessage.class, TppelModVariables.WorldSavedDataSyncMessage::buffer,
-				TppelModVariables.WorldSavedDataSyncMessage::new, TppelModVariables.WorldSavedDataSyncMessage::handler);
-		MinecraftForge.EVENT_BUS.register(this);
+		elements.forEach(ToeppelmodModElements.ModElement::initElements);
 	}
 
 	public void registerSounds(RegistryEvent.Register<net.minecraft.util.SoundEvent> event) {
 		for (Map.Entry<ResourceLocation, net.minecraft.util.SoundEvent> sound : sounds.entrySet())
 			event.getRegistry().register(sound.getValue().setRegistryName(sound.getKey()));
 	}
-
-	@SubscribeEvent
-	public void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
-		if (!event.getPlayer().world.isRemote) {
-			WorldSavedData mapdata = TppelModVariables.MapVariables.get(event.getPlayer().world);
-			WorldSavedData worlddata = TppelModVariables.WorldVariables.get(event.getPlayer().world);
-			if (mapdata != null)
-				TppelMod.PACKET_HANDLER.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) event.getPlayer()),
-						new TppelModVariables.WorldSavedDataSyncMessage(0, mapdata));
-			if (worlddata != null)
-				TppelMod.PACKET_HANDLER.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) event.getPlayer()),
-						new TppelModVariables.WorldSavedDataSyncMessage(1, worlddata));
-		}
-	}
-
-	@SubscribeEvent
-	public void onPlayerChangedDimension(PlayerEvent.PlayerChangedDimensionEvent event) {
-		if (!event.getPlayer().world.isRemote) {
-			WorldSavedData worlddata = TppelModVariables.WorldVariables.get(event.getPlayer().world);
-			if (worlddata != null)
-				TppelMod.PACKET_HANDLER.send(PacketDistributor.PLAYER.with(() -> (ServerPlayerEntity) event.getPlayer()),
-						new TppelModVariables.WorldSavedDataSyncMessage(1, worlddata));
-		}
-	}
 	private int messageID = 0;
 	public <T> void addNetworkMessage(Class<T> messageType, BiConsumer<T, PacketBuffer> encoder, Function<PacketBuffer, T> decoder,
 			BiConsumer<T, Supplier<NetworkEvent.Context>> messageConsumer) {
-		TppelMod.PACKET_HANDLER.registerMessage(messageID, messageType, encoder, decoder, messageConsumer);
+		ToeppelmodMod.PACKET_HANDLER.registerMessage(messageID, messageType, encoder, decoder, messageConsumer);
 		messageID++;
 	}
 
@@ -122,13 +91,17 @@ public class TppelModElements {
 	public List<Supplier<EntityType<?>>> getEntities() {
 		return entities;
 	}
+
+	public List<Supplier<Enchantment>> getEnchantments() {
+		return enchantments;
+	}
 	public static class ModElement implements Comparable<ModElement> {
 		@Retention(RetentionPolicy.RUNTIME)
 		public @interface Tag {
 		}
-		protected final TppelModElements elements;
+		protected final ToeppelmodModElements elements;
 		protected final int sortid;
-		public ModElement(TppelModElements elements, int sortid) {
+		public ModElement(ToeppelmodModElements elements, int sortid) {
 			this.elements = elements;
 			this.sortid = sortid;
 		}

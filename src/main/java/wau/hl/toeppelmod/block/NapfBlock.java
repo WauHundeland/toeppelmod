@@ -1,7 +1,7 @@
 
 package wau.hl.toeppelmod.block;
 
-import wau.hl.toeppelmod.TppelModElements;
+import wau.hl.toeppelmod.ToeppelmodModElements;
 
 import net.minecraftforge.registries.ObjectHolder;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -23,11 +23,11 @@ import net.minecraft.block.Block;
 import java.util.List;
 import java.util.Collections;
 
-@TppelModElements.ModElement.Tag
-public class NapfBlock extends TppelModElements.ModElement {
+@ToeppelmodModElements.ModElement.Tag
+public class NapfBlock extends ToeppelmodModElements.ModElement {
 	@ObjectHolder("toeppelmod:napf")
 	public static final Block block = null;
-	public NapfBlock(TppelModElements instance) {
+	public NapfBlock(ToeppelmodModElements instance) {
 		super(instance, 2);
 	}
 

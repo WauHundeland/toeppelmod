@@ -13,29 +13,30 @@
       }
     },
     {
-      "name": "Toppel",
-      "type": "mob",
-      "sortid": 1,
-      "compiles": true,
-      "locked_code": false,
-      "ids": {}
-    },
-    {
       "name": "Napf",
       "type": "block",
       "sortid": 2,
       "compiles": true,
       "locked_code": false,
       "ids": {}
+    },
+    {
+      "name": "Toeppl",
+      "type": "mob",
+      "sortid": 3,
+      "compiles": false,
+      "locked_code": false,
+      "ids": {},
+      "registry_name": "toeppl"
     }
   ],
   "variable_elements": [],
   "sound_elements": [],
   "language_map": {
     "en_us": {
-      "entity.toeppelmod.toppel": "Töppel",
       "block.toeppelmod.napf": "Napf",
-      "item.toeppelmod.toppel": "Töppel Spawn Egg"
+      "item.toeppelmod.toeppl": "Töppel Spawn Egg",
+      "entity.toeppelmod.toeppl": "Töppel"
     }
   },
   "workspaceSettings": {
@@ -54,5 +55,5 @@
     "modElementsPackage": "wau.hl.toeppelmod",
     "lockBaseModFiles": false
   },
-  "mcreatorVersion": 202000213314
+  "mcreatorVersion": 202000432115
 }
